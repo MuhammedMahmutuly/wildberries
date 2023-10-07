@@ -45,4 +45,9 @@ public class ProductController {
     public List<ProductDTO3> getTest1(@RequestParam String name) {
         return serviceProduct.getAllByTypeAndModel(name);
     }
+
+    @GetMapping("/getTest2")
+    public List<ProductDTO3> getTest2(@RequestParam String name) {
+        return serviceProduct.getAllByTypeAndModel(name);
+    }
 }
