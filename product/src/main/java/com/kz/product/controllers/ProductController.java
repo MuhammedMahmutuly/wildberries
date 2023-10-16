@@ -5,8 +5,6 @@ import com.kz.product.entityes.dto.ProductDTO2;
 import com.kz.product.entityes.dto.ProductDTO3;
 import com.kz.product.services.ServiceProduct;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import org.apache.commons.collections4.Get;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
