@@ -4,24 +4,62 @@ import com.kz.product.entityes.dto.ProductDTO;
 import com.kz.product.entityes.dto.ProductDTO2;
 import com.kz.product.entityes.dto.ProductDTO3;
 import com.kz.product.services.ServiceProduct;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Validated
 @RestController
 @AllArgsConstructor
+@Tag(
+        name = "Контроллер для продукта",
+        description = "Описание продукта "
+)
 public class ProductController {
 
     @Autowired
     private ServiceProduct serviceProduct;
 
+    @Operation(summary = "Метод получения",
+            description = "Метод для получения всех продукт",
+            responses = {
+                    @ApiResponse(responseCode = "200",
+                            description = "Описание ответа 200"),
+                    @ApiResponse(responseCode = "300",
+                            description = "Описание ответа 300"),
+                    @ApiResponse(responseCode = "400",
+                            description = "Описание ответа 400"),
+                    @ApiResponse(responseCode = "500",
+                            description = "Описание ответа 500")
+            })
+
     @GetMapping("/getAllProducts")
     public List<ProductDTO> getAllProducts() {
         return serviceProduct.getAllProducts();
+    }
+
+    @Operation(summary = "Метод добавления",
+            description = "Метод для добавления продукта",
+            responses = {
+                    @ApiResponse(responseCode = "200",
+                            description = "Успешный запрос"),
+                    @ApiResponse(responseCode = "300",
+                            description = "Описание ответа 300"),
+                    @ApiResponse(responseCode = "400",
+                            description = "Описание ответа 400"),
+                    @ApiResponse(responseCode = "500",
+                            description = "Описание ответа 500")
+            })
+    @PostMapping("addProduct")
+    public void addProducts(@RequestBody @Valid ProductDTO productDTO ) {
+        serviceProduct.addProducts(productDTO);
     }
 
     @GetMapping("/getAllProductsByType")
@@ -48,5 +86,4 @@ public class ProductController {
     public List<ProductDTO3> getTest2(@RequestParam String name) {
         return serviceProduct.getAllByTypeAndModel(name);
     }
-
 }

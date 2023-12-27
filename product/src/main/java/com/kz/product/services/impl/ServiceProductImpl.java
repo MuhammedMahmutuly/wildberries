@@ -40,4 +40,9 @@ public class ServiceProductImpl implements ServiceProduct {
         return ProductMapper.toListDTO3(productRepository.findAllByTypeAndModel(name));
     }
 
+    @Override
+    public void addProducts(ProductDTO productDTO) {
+        productRepository.save(ProductMapper.toEntity(productDTO));
+    }
+
 }
