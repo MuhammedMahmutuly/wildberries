@@ -16,4 +16,6 @@ public interface ServiceProduct {
     public List<ProductDTO2> getAllByName(String type);
 
     public List<ProductDTO3> getAllByTypeAndModel(String name);
+
+    public void addProducts(ProductDTO productDTO);
 }
