@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -43,6 +44,11 @@ public class ServiceProductImpl implements ServiceProduct {
     @Override
     public void addProducts(ProductDTO productDTO) {
         productRepository.save(ProductMapper.toEntity(productDTO));
+    }
+
+    @Override
+    public void deleteProducts(UUID id) {
+        productRepository.deleteById(id);
     }
 
 }
