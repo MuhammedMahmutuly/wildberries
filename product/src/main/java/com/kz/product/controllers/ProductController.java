@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Validated
 @RestController
@@ -31,7 +32,7 @@ public class ProductController {
             description = "Метод для получения всех продукт",
             responses = {
                     @ApiResponse(responseCode = "200",
-                            description = "Описание ответа 200"),
+                            description = "Успешный запрос"),
                     @ApiResponse(responseCode = "300",
                             description = "Описание ответа 300"),
                     @ApiResponse(responseCode = "400",
@@ -62,6 +63,24 @@ public class ProductController {
         serviceProduct.addProducts(productDTO);
     }
 
+
+    @Operation(summary = "Метод удаления",
+            description = "Метод для удаления продукта по ID",
+            responses = {
+                    @ApiResponse(responseCode = "200",
+                            description = "Успешно удален"),
+                    @ApiResponse(responseCode = "300",
+                            description = "Описание ответа 300"),
+                    @ApiResponse(responseCode = "400",
+                            description = "Описание ответа 400"),
+                    @ApiResponse(responseCode = "500",
+                            description = "Описание ответа 500")
+            })
+    @DeleteMapping("deleteProductById")
+    public void deleteProducts(@RequestParam UUID id) {
+        serviceProduct.deleteProducts(id);
+    }
+
     @GetMapping("/getAllProductsByType")
     public List<ProductDTO> getAllProductsByType(@RequestParam String type) {
         return serviceProduct.getAllProductsByType(type);
@@ -77,13 +96,4 @@ public class ProductController {
         return serviceProduct.getAllByTypeAndModel(name);
     }
 
-    @GetMapping("/getTest1")
-    public List<ProductDTO3> getTest1(@RequestParam String name) {
-        return serviceProduct.getAllByTypeAndModel(name);
-    }
-
-    @GetMapping("/getTest2")
-    public List<ProductDTO3> getTest2(@RequestParam String name) {
-        return serviceProduct.getAllByTypeAndModel(name);
-    }
 }
